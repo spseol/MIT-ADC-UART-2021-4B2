@@ -2,8 +2,8 @@
 #include "milis.h"
 
 /*#include "delay.h"*/
-/*#include <stdio.h>*/
-/*#include "../lib/uart.c"*/
+#include <stdio.h>
+#include "../lib/uart.c"
 
 #define _ISOC99_SOURCE
 #define _GNU_SOURCE
@@ -13,7 +13,6 @@
 #define LED_HIGH   GPIO_WriteHigh(LED_PORT, LED_PIN)
 #define LED_LOW  GPIO_WriteLow(LED_PORT, LED_PIN)
 #define LED_TOGG GPIO_WriteReverse(LED_PORT, LED_PIN)
-
 #define BTN_PORT GPIOE
 #define BTN_PIN  GPIO_PIN_4
 #define BTN_PUSH (GPIO_ReadInputPin(BTN_PORT, BTN_PIN)==RESET) 
@@ -32,13 +31,15 @@ int main(void)
     uint32_t time = 0;
 
     setup();
-    /*init_uart();*/
+    init_uart();
 
     while (1) {
 
         if (milis() - time > 333 && BTN_PUSH) {
             LED_TOGG; 
             time = milis();
+            
+            printf("Ahoj\r\n");
         }
 
         /*LED_FLIP; */
